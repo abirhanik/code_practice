@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic HTML Template</title>
+    <style>
+        .divCSS{
+            background-color: lightsalmon;
+            height: 150px;
+            padding: 10px;
+            margin: 20px;
+            border-radius: 5px;
+            box-shadow: 5px 5px 10px gray; /* x y spread*/
+        }
+    </style>
+</head>
+<body>
+    <h3>Practice Dynamic HTML Template</h3>
+    <ul id="dataShowInListItem">
+        
+    </ul>
+    <div id="dataShowInDiv">
+
+    </div>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(res => res.json())
+        .then(data => dynamicHtmlInList(data))
+        function dynamicHtmlInList(data){
+            let userName = '';
+            data.forEach(listItem => {
+                userName = userName + `<li>${listItem.name}</li>`;
+                // console.log(userName);
+                
+            });
+            const ul = document.getElementById('dataShowInListItem');
+            ul.innerHTML = userName;
+        }
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(res => res.json())
+        .then(data => dynamicHtmlInDiv(data))
+        function dynamicHtmlInDiv(data){
+            let userEmail = '';
+            data.forEach(divItem => {
+                userEmail = userEmail + `
+                <div class = "divCSS">
+                    <h3>Div Heading</h3>
+                    <p> this is practice of module no 32-6 </p>
+                    <ul>
+                        <li>${divItem.email}</li>
+                    </ul>
+                    <ol>
+                        <li>${divItem.website}</li>
+                    </ol>
+                </div>
+                `;
+            });
+            const div = document.getElementById('dataShowInDiv');
+            div.innerHTML = userEmail;
+        }
+    </script>
+</body>
+</html>
